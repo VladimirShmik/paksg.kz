@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Проверяем, является ли текущая страница страницей товара WooCommerce
     if (document.body.classList.contains('single-product')) {
         // Находим все элементы с классом single-documents и обрабатываем их
-        var documentElements = document.querySelectorAll('.single-documents a');
+        let documentElements = document.querySelectorAll('.single-documents a');
 
         documentElements.forEach(function(link) {
             // Добавляем класс product-download
@@ -54,22 +54,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-// lazy-load img
-
-function lazyLoad(img) {
-    var ratio = +img.getAttribute('data-height') / +img.getAttribute('data-width');
-    img.style.paddingTop = ratio * img.getBoundingClientRect().width + 'px';
-    var lazy = new Image();
-    lazy.onload = function() {
-        img.src = lazy.src;
-        img.style.paddingTop = 0;
-        img.classList.remove('loading');
-        img.classList.add('loaded');
-    }
-    return { load: load }
-    function load() {
-        img.classList.add('loading');
-        lazy.src = img.getAttribute('data-src');
-    }
-}
